@@ -21,7 +21,7 @@ Clone this repository and install dependencies:
 
 ```bash
 git clone https://github.com/mesepith/heygen-stt-app.git
-cd heygen-stt-demo
+cd heygen-stt-app
 npm install
 ```
 
