@@ -20,7 +20,7 @@ No extra keys or third-party STT providers are required — only your **Heygen A
 Clone this repository and install dependencies:
 
 ```bash
-git clone https://github.com/your-username/heygen-stt-demo.git
+git clone https://github.com/mesepith/heygen-stt-app.git
 cd heygen-stt-demo
 npm install
 ```
