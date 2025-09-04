@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Heygen STT Demo (Next.js)
 
-## Getting Started
+This project demonstrates how to use **Heygen’s real-time Speech-to-Text (STT)** service with a Next.js app. It securely fetches a temporary streaming token from Heygen using your API key, starts a live STT session, and displays transcribed text instantly as you speak into your microphone.
 
-First, run the development server:
+No extra keys or third-party STT providers are required — only your **Heygen API key**.
+
+---
+
+## ✨ Features
+
+* Secure server-side handling of the Heygen API key
+* Client-side demo page with “Start Listening” and “Stop Listening” buttons
+* Real-time transcription of your speech into text
+* Simple UI built with React + Next.js App Router
+
+---
+
+## ⚙️ Installation
+
+Clone this repository and install dependencies:
+
+```bash
+git clone https://github.com/your-username/heygen-stt-demo.git
+cd heygen-stt-demo
+npm install
+```
+
+---
+
+## 🔑 Environment Variables
+
+Next.js uses `.env.local` to store secrets. Create a file named **`.env.local`** in the root of your project (same level as `package.json`).
+
+Add the following variables:
+
+```env
+HEYGEN_API_KEY=your_heygen_api_key_here
+NEXT_PUBLIC_BASE_API_URL=https://api.heygen.com
+```
+
+* `HEYGEN_API_KEY` → Your **secret Heygen API key** (never expose this in frontend code).
+* `NEXT_PUBLIC_BASE_API_URL` → Defaults to Heygen’s API base. Keep as-is unless you’re testing against a different endpoint.
+
+---
+
+## 🚀 Running the Project
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You’ll see a simple UI where you can:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Click **Start Listening** → Begin recording and live transcription.
+* Click **Stop Listening** → End the session and free resources.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📂 Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+app/
+ ├─ api/
+ │   └─ get-access-token/
+ │       └─ route.ts   # Secure server route to fetch Heygen token
+ ├─ page.tsx           # Frontend page with STT demo UI
+.env.local             # Your Heygen API key
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📝 Notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* The API key is **never exposed to the frontend**. It stays on the server route (`/api/get-access-token`).
+* The frontend requests a short-lived token from your server, which is then used by the Heygen SDK.
+* By default, STT is configured to use **Deepgram** as provider with **Hindi (`hi`)** language. You can change the `sttConfiguration` in `page.tsx`.
